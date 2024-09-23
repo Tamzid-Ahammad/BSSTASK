@@ -10,5 +10,7 @@
   <ItemGroup>
     <None Remove="src\app\guards\auth.guard.spec.ts" />
     <None Remove="src\app\interceptors\auth.interceptor.spec.ts" />
+    <None Remove="src\app\services\message.service.spec.ts" />
+    <None Remove="src\app\services\user.service.spec.ts" />
   </ItemGroup>
 </Project>
