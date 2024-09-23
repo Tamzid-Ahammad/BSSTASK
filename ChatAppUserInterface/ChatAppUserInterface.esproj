@@ -7,4 +7,8 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\ChatAppUserInterface\</BuildOutputFolder>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="src\app\guards\auth.guard.spec.ts" />
+    <None Remove="src\app\interceptors\auth.interceptor.spec.ts" />
+  </ItemGroup>
 </Project>
