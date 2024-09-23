@@ -13,4 +13,7 @@
     <None Remove="src\app\services\message.service.spec.ts" />
     <None Remove="src\app\services\user.service.spec.ts" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\assets\img\" />
+  </ItemGroup>
 </Project>
