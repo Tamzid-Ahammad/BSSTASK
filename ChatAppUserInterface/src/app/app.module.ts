@@ -12,19 +12,19 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { AccessdeniedComponent } from './accessdenied/accessdenied.component';
 import { UserComponent } from './user/user.component';
-import { LoginComponent } from './user/login/login.component';
-import { RegistrationComponent } from './user/registration/registration.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccessdeniedComponent,
     UserComponent,
+    HomeComponent,
     LoginComponent,
     RegistrationComponent,
-    HomeComponent,
   ],
   imports: [
     BrowserModule,

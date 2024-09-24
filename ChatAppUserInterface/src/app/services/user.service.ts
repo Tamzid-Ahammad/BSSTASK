@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-    readonly BaseURI = environment.apiBaseUrl;
+  readonly BaseURI = 'https://localhost:7104/api';
   UserID: any
   UserFullName: any
   UserN: any

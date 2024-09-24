@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
-import { environment } from '../../environments/environment';
 import { Guid } from 'guid-typescript';
 
 @Component({
@@ -20,6 +19,7 @@ export class HomeComponent implements OnInit {
   message: string
   hubConnection: HubConnection;
   connectedUsers: any[] = []
+  readonly chatHubUrl = 'https://localhost:7104/chathub';
   constructor(private router: Router, private service: UserService, private messageService: MessageService) { }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
     );
 
     this.message = ''
-    this.hubConnection = new HubConnectionBuilder().withUrl(environment.chatHubUrl).build();
+    this.hubConnection = new HubConnectionBuilder().withUrl(this.chatHubUrl).build();
     const self = this
     this.hubConnection.start()
       .then(() => {
@@ -159,15 +159,6 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
   }
-
-
-
-
-
-
-
-
-
 
 
 }
