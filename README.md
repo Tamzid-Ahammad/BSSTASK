@@ -6,7 +6,7 @@ Microsoft.AspNetCore.Identity.EntityFrameworkCore
 Microsoft.AspNetCore.Mvc.NewtonsoftJson
 Microsoft.EntityFrameworkCore
 
-As for the frontend I use Standalone Typescript Angular Project along  with angular version 17
+As for the frontend I use Standalone Typescript Angular Project along  with angular version 17 and
 Microsoft/signalR version 8 for real time chat
 Bootstrap and Angular material for making more appreciatable design
 
