@@ -10,10 +10,15 @@ export class MessageService {
   constructor(private http: HttpClient) {
 
   }
-  getUserReceivedMessages(userId: string) {
-    return this.http.get(this.BaseURI + '/message');
+  sendMessage(conversationId: string, message: any) {
+    return this.http.post(this.BaseURI +`/chat/conversation/${conversationId}/send`, message)
   }
-  deleteMessage(message: any) {
-    return this.http.post(this.BaseURI + '/message', message);
+  getConversation(myUserId: string, targetUserId: string) {
+    return this.http.get(this.BaseURI + `/chat/getConversation/${myUserId}/${targetUserId}`)
   }
+  getMessages(conversationId: string) {
+    return this.http.get(this.BaseURI + `/chat/conversation/${conversationId}/messages`)
+  }
+ 
+
 }

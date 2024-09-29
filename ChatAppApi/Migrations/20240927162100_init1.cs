@@ -5,7 +5,7 @@
 namespace ChatAppApi.Migrations
 {
     /// <inheritdoc />
-    public partial class FinalTest : Migration
+    public partial class init1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

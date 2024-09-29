@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ChatAppApi.Entities
+namespace ChatAppApi.Model
 {
-    public class ApplicationUser :IdentityUser
+    public class ApplicationUser : IdentityUser<Guid>
     {
         [Column(TypeName = "nvarchar(150)")]
         public string FirstName { get; set; }
@@ -11,6 +11,6 @@ namespace ChatAppApi.Entities
         [Column(TypeName = "nvarchar(150)")]
         public string LastName { get; set; }
 
-        public bool IsOnline { get; set; }
+        public ICollection<UsersConversation> UsersConversations { get; set; }
     }
 }

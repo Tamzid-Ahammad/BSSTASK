@@ -1,4 +1,4 @@
-﻿namespace ChatAppApi.Model
+﻿namespace ChatAppApi.ViewModels
 {
     public class UserConnection
     {

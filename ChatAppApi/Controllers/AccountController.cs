@@ -1,6 +1,6 @@
 ﻿using ChatAppApi.AppSetting;
-using ChatAppApi.Entities;
 using ChatAppApi.Model;
+using ChatAppApi.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -37,8 +37,8 @@ namespace ChatAppApi.Controllers
 
         [HttpPost]
         [Route("Register")]
-        //POST : /api/User/Register
-        public async Task<Object> Register(ApplicationUserModel model)
+        //POST : /api/account/Register
+        public async Task<Object> Register([FromBody]RegisterRequest model)
         {
             var applicationUser = new ApplicationUser()
             {
@@ -63,6 +63,7 @@ namespace ChatAppApi.Controllers
 
         [HttpPost]
         [Route("Login")]
+        //POST : /api/account/Login
         public async Task<IActionResult> Login(LoginModel model)
         {
             var user = await this.userManager.FindByNameAsync(model.Email);
@@ -76,9 +77,12 @@ namespace ChatAppApi.Controllers
                     {
                         Subject = new ClaimsIdentity(new Claim[]
                         {
+
+                        new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
                         new Claim("UserID",user.Id.ToString()),
                         new Claim("UserName",user.UserName),
                         new Claim("FullName",user.FirstName+" "+user.LastName),
+
                         }),
                         Expires = DateTime.UtcNow.AddDays(1),
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
@@ -86,7 +90,7 @@ namespace ChatAppApi.Controllers
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var securityToken = tokenHandler.CreateToken(tokenDescriptor);
                     var token = tokenHandler.WriteToken(securityToken);
-                    user.IsOnline = true;
+                    
                     return Ok(new { token, user });
                 }
                 catch (Exception exp)

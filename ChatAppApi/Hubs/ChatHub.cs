@@ -1,67 +1,29 @@
-﻿using ChatAppApi.Business_Interface.ServiceQuery;
-using ChatAppApi.Entities;
-using ChatAppApi.Model;
+﻿using ChatAppApi.Model;
+using ChatAppApi.ViewModels;
 using Microsoft.AspNetCore.SignalR;
+using System.Collections.Concurrent;
+using System.Security.Claims;
 
 namespace ChatAppApi.Hubs
 {
-    public class ChatHub : Hub
+    public class ChatHub : Hub<IChatHub>
     {
-        private readonly IMessageService messageService;
-        public ChatHub(IMessageService messageService)
+        private static ConcurrentDictionary<string, string> UserConnections = new ConcurrentDictionary<string, string>();
+
+        public override async Task OnConnectedAsync()
         {
-            this.messageService = messageService;
-        }
-        static IList<UserConnection> Users = new List<UserConnection>();
-        public Task SendMessageToUser(Message message)
-        {
-            var reciever = Users.FirstOrDefault(x => x.UserId == message.Receiver);
-            var connectionId = reciever == null ? "offlineUser" : reciever.ConnectionId;
-            this.messageService.Add(message);
-            return Clients.Client(connectionId).SendAsync("ReceiveDM", Context.ConnectionId, message);
+            // Add the connection to the user
+            var userId = Context.UserIdentifier;
+            UserConnections[Context.ConnectionId] = userId;
+            await base.OnConnectedAsync();
         }
 
-        public async Task DeleteMessage(MessageDeleteModel message)
+      
+        public override async Task OnDisconnectedAsync(Exception exception)
         {
-            var deletedMessage = await this.messageService.DeleteMessage(message);
-            await Clients.All.SendAsync("BroadCastDeleteMessage", Context.ConnectionId, deletedMessage);
-        }
-
-        public async Task PublishUserOnConnect(string id, string fullname, string username)
-        {
-
-            var existingUser = Users.FirstOrDefault(x => x.Username == username);
-            var indexExistingUser = Users.IndexOf(existingUser);
-
-            UserConnection user = new UserConnection
-            {
-                UserId = id,
-                ConnectionId = Context.ConnectionId,
-                FullName = fullname,
-                Username = username
-            };
-
-            if (!Users.Contains(existingUser))
-            {
-                Users.Add(user);
-
-            }
-            else
-            {
-                Users[indexExistingUser] = user;
-            }
-
-            await Clients.All.SendAsync("BroadcastUserOnConnect", Users);
-
-        }
-
-        public void RemoveOnlineUser(string userID)
-        {
-            var user = Users.Where(x => x.UserId == userID).ToList();
-            foreach (UserConnection i in user)
-                Users.Remove(i);
-
-            Clients.All.SendAsync("BroadcastUserOnDisconnect", Users);
+            // Remove the connection when the user disconnects
+            UserConnections.TryRemove(Context.ConnectionId, out _);
+            await base.OnDisconnectedAsync(exception);
         }
     }
 }
