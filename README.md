@@ -75,4 +75,94 @@ Swagger has been integrated to document and interact with the API. It provides a
 
 
 
-#
+# Chat Application Frontend
+
+
+##Project Overview:
+This Angular-based project provides a user authentication and messaging functionality with JWT-based token handling and SignalR integration for real-time chat.
+
+##Technologies Used:
+Standalone Typescript Angular Project Templates
+Node.js
+Angular Material UI component library
+Bootstrap
+
+##Key Components:
+1. Login Component (login.component.ts):
+
+    Handles user login.
+    On successful login, the JWT token and user details are stored in localStorage.
+    If a user is already logged in (token exists), they are redirected to the home 
+    page.
+2. Registration Component (registration.component.ts):
+
+    Manages new user registration.
+    On successful registration, the user details are posted to the backend.
+    Toastr is used to notify about success or errors (duplicate username, invalid 
+    email, etc.).
+3. User Service (user.service.ts):
+
+    Provides methods to handle user-related tasks such as registration, login, and fetching all users.
+    Sends HTTP requests to the backend API for authentication and user management.
+4. Message Service (message.service.ts):
+
+    Manages message sending and conversation retrieval.
+    Allows sending messages to a specific conversation and retrieving chat history.
+5. Authentication Interceptor (auth.interceptor.ts):
+
+    Intercepts HTTP requests to add the JWT token in the Authorization header.
+    Handles unauthorized (401) and forbidden (403) errors, redirecting to login or access denied pages.
+6. Auth Guard (auth.guard.ts):
+
+    Protects routes from unauthorized access. If a user is not logged in (no token in localStorage), they are redirected to the login page.
+7. Home Component (home.component.ts):
+
+    Manages real-time messaging using SignalR and displays users and messages.
+    Once logged in, users can select another user to start chatting.
+    Message history is displayed, and new messages are sent in real-time through SignalR.
+8. Routing (app-routing.module.ts):
+
+    Defines routes for the login, registration, home, and access-denied pages.
+    Protects the home page with the authGuard.
+9. Main Application Module (app.module.ts):
+
+    Imports necessary Angular modules, such as FormsModule, ReactiveFormsModule, ToastrModule, etc.
+    Configures HTTP interceptors for authentication.
+
+##	Prerequisites
+To install angular in the local system you need the following.
+
+	Node.js
+Angular requires a current, active LTS, or maintenance LTS version of Node.js.  Please 
+visit https://nodejs.org/en/   to download and install node in your environment.
+	npm package manager
+Angular, the Angular CLI, and Angular applications depend on npm packages for many features and functions. To download and install npm packages, you need an npm package manager. npm package manger is installed with Node.js by default. To check that you have the npm client installed, run npm -v in a terminal window.
+•	Install Angular CLI
+Angular CLI helps you to create projects, generate application and library code, and perform a variety of ongoing development tasks such as testing, bundling, and deployment.
+
+To install the Angular CLI, open a terminal window and run the following command:
+npm install -g @angular/cli
+•	Run the Application
+	Unzip file
+	Navigate to the workspace folder, such as ChatAppUserInterface.
+![Screenshot (21)](https://github.com/user-attachments/assets/090b9970-0fef-4a6b-a812-3b2fb01a0dea)
+	Open CMD window 
+	Run npm install to install all packages used in application
+	Write ng serve -o to run the application. And browse http://localhost:4200 to view the chat app.![Screenshot (15)](https://github.com/user-attachments/assets/5361be7f-c64a-4d49-a221-d1d7c64bbe67)
+  
+If you aren't an registered user then go to click signup for going registration page![Screenshot (22)](https://github.com/user-attachments/assets/d4527db2-5d51-4d87-ae76-7c8d7459071b)
+How to register as a user to the chatapp ,i give you a demo picture 
+![Screenshot (16)](https://github.com/user-attachments/assets/6e523abd-5ab4-419c-9519-4940ac376b3e)
+
+How to login to the chatapp i give you a demo picture 
+![Screenshot (17)](https://github.com/user-attachments/assets/c83d6315-008f-4ded-8ab5-ce1d5377f424)
+After login You will be sent to Home page where in the left side you can found all the other user's that using this application . Now select one of those users and start your chat
+![Screenshot (18)](https://github.com/user-attachments/assets/d0cf06a5-11eb-421a-aadc-70d32ca52285)
+![Screenshot (19)](https://github.com/user-attachments/assets/7451fb34-7c27-446a-92fe-4dd6436bf4e3)
+![Screenshot (20)](https://github.com/user-attachments/assets/38fcc855-7ca3-4fb1-a8d7-5f9d87033a32)
+## SignalR Real-Time Chat:
+
+    The HomeComponent establishes a SignalR connection using the user's JWT token.
+    New messages are handled in real-time, and users' online status is displayed.
+
+Now this is how I make this ChatApplication.
