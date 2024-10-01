@@ -34,6 +34,7 @@ Prerequisites
  "ConnectionStrings": {
   "DefaultConnection": "Server=YOUR_SERVER_NAME;Database=ChatAppsDB;Trusted_Connection=True;Trust Server Certificate=True"
 }
+
 3. Migrate Database: Run the following commands to apply migrations and set up the database:
 Go TO => Tools>NuGet Package Manager > Package Manager Console and type
  Add-Migration Initial press enter & after type Update-Database and press enter
