@@ -4,23 +4,23 @@
 This project implements a chat application backend, featuring user authentication via JWT tokens, real-time messaging using SignalR, and a database using Entity Framework Core with SQL Server.
 
 ##Technologies Used:
-ASP.NET Core: For building the API backend.
-Entity Framework Core: For database interaction (SQL Server).
-ASP.NET Core Identity: For user authentication and management.
-JWT: For secure authentication with tokens.
-SignalR: For real-time chat functionality.
-Swagger: For API documentation and testing.
-Newtonsoft.Json: For handling JSON serialization/deserialization.
-SQL Server: For the database.
+1. ASP.NET Core: For building the API backend.
+2. Entity Framework Core: For database interaction (SQL Server).
+3. ASP.NET Core Identity: For user authentication and management.
+4. JWT: For secure authentication with tokens.
+5. SignalR: For real-time chat functionality.
+6. Swagger: For API documentation and testing.
+7. Newtonsoft.Json: For handling JSON serialization/deserialization.
+8. SQL Server: For the database.
 
 
 ##Features:
-User Authentication & Authorization: Users can register and log in using their email and password. JWT tokens are used for authentication.
-Real-Time Chat: Users can send and receive messages in real-time using SignalR.
-Conversations & Messages: Users can create and participate in conversations and send messages within those conversations.
-CRUD Operations: Create, read, and delete operations for conversations and messages.
-User Management: Manage user profiles and their participation in conversations.
-Swagger API Documentation: Interactive API testing via Swagger.
+1. User Authentication & Authorization: Users can register and log in using their email and password. JWT tokens are used for authentication.
+2. Real-Time Chat: Users can send and receive messages in real-time using SignalR.
+3. Conversations & Messages: Users can create and participate in conversations and send messages within those conversations.
+4. CRUD Operations: Create, read, and delete operations for conversations and messages.
+5. User Management: Manage user profiles and their participation in conversations.
+6. Swagger API Documentation: Interactive API testing via Swagger.
 
 ##Installation and Setup
 Prerequisites
